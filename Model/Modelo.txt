@@ -1,0 +1,107 @@
+
+CREATE TABLE Category
+( 
+	idCategory           int IDENTITY ( 1,1 ) NOT FOR REPLICATION ,
+	name                 int  NOT NULL ,
+	 PRIMARY KEY (idCategory ASC)
+)
+go
+
+
+
+CREATE TABLE Appliances
+( 
+	idAppliances         int IDENTITY ( 1,1 ) NOT FOR REPLICATION ,
+	name                 int  NOT NULL ,
+	description          int  NOT NULL ,
+	idCategory           int  NULL ,
+	 PRIMARY KEY (idAppliances ASC),
+	 FOREIGN KEY (idCategory) REFERENCES Category(idCategory)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+)
+go
+
+
+
+CREATE TABLE Month
+( 
+	idMonth              int IDENTITY ( 1,1 ) NOT FOR REPLICATION ,
+	name                 int  NOT NULL ,
+	startDate            int  NOT NULL ,
+	endingDate           int  NOT NULL ,
+	 PRIMARY KEY (idMonth ASC)
+)
+go
+
+
+
+CREATE TABLE User
+( 
+	idUser               int IDENTITY ( 1,1 ) ,
+	email                int  NOT NULL ,
+	password             int  NOT NULL ,
+	phoneNumber          int  NOT NULL ,
+	registrationDate     int  NOT NULL ,
+	 PRIMARY KEY (idUser ASC)
+)
+go
+
+
+
+CREATE TABLE Person
+( 
+	idPerson             int IDENTITY ( 1,1 ) NOT FOR REPLICATION ,
+	name                 varchar(50)  NOT NULL ,
+	lastName             varchar(50)  NOT NULL ,
+	sex                  char(1)  NOT NULL ,
+	identificationDocument varchar(8)  NOT NULL ,
+	direction            varchar(60)  NOT NULL ,
+	birthDate            datetime  NOT NULL ,
+	idUser               int  NULL ,
+	 PRIMARY KEY (idPerson ASC),
+	 FOREIGN KEY (idUser) REFERENCES User(idUser)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+)
+go
+
+
+
+CREATE TABLE LightBill
+( 
+	idLightBill          int IDENTITY ( 1,1 ) NOT FOR REPLICATION ,
+	codeLightBill        int  NOT NULL ,
+	issueDate            int  NOT NULL ,
+	idMonth              int  NULL ,
+	idPerson             int  NULL ,
+	 PRIMARY KEY (idLightBill ASC),
+	 FOREIGN KEY (idMonth) REFERENCES Month(idMonth)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION,
+ FOREIGN KEY (idPerson) REFERENCES Person(idPerson)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+)
+go
+
+
+
+CREATE TABLE DetailAppliances_LightBill
+( 
+	idAppliances         int  NOT NULL ,
+	idLightBill          int  NOT NULL ,
+	wattsPower           int  NOT NULL ,
+	amount               int  NOT NULL ,
+	Hours                int  NOT NULL ,
+	 PRIMARY KEY (idAppliances ASC,idLightBill ASC),
+	 FOREIGN KEY (idAppliances) REFERENCES Appliances(idAppliances)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION,
+ FOREIGN KEY (idLightBill) REFERENCES LightBill(idLightBill)
+		ON DELETE NO ACTION
+		ON UPDATE NO ACTION
+)
+go
+
+

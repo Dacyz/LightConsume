@@ -1,0 +1,36 @@
+
+.tab{
+    -fx-alignment: CENTER;
+    -fx-pref-height:  25;
+    -fx-background-color:   #2cab31;
+    -fx-font-size: 10;
+    -fx-font-color: #2cab31;
+    -fx-background-radius: 5px 5px 0px 0px;
+    -fx-border-radius: 5px 5px 0px 0px;
+}
+
+.tab .tab-label{
+    -fx-alignment: CENTER;
+    -fx-font-size: 12px;
+    -fx-text-fill: white;
+    -fx-wrap-text: true;
+    -fx-cursor:hand;
+}
+
+
+.tab-header-background{
+    -fx-background-color:   #2cab31;
+    -fx-background-radius: 5px 5px 0px 0px;
+    -fx-border-radius: 5px 5px 0px 0px;
+}
+
+.tab:selected {
+    -fx-background-color: #1d7221;
+} 
+
+.tab:hover .tab-label{
+    -fx-text-fill: #c2ffd3;
+}
+
+
+
